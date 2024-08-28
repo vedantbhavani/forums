@@ -1,6 +1,6 @@
 <?php
+require("partials/dbconnect.php");
 session_start();
-require("partials/dbconnect.php")
 ?>
 
 <!doctype html>
@@ -28,8 +28,9 @@ require("partials/dbconnect.php")
     }
     ?>
 
-    <?php
+<?php
     $myalert = false;
+    $id = $_GET['threadid'];
     $method = $_SERVER['REQUEST_METHOD'];
     if ($method == 'POST') {
         // Insert in to comment db
@@ -76,7 +77,8 @@ require("partials/dbconnect.php")
                     <label for="comment" class="form-label">Enter your comment</label>
                     <textarea class="bg-secondary-subtle form-control" name="comment" id="comment" rows="3"></textarea>
                     <input type="hidden" name="sno" value="'.$_SESSION["sno"].'">
-                </div>
+                    <input type="hidden" name="sno" value="'.$_SESSION["sno"].'">
+                    </div>
                 <button type="submit" class="btn btn-primary">Post Comment</button>
             </form>
             ';
@@ -106,17 +108,15 @@ require("partials/dbconnect.php")
             $content = $row['comment_content'];
             $time = $row['comment_time'];
             $thread_user_id = $row['comment_by'];
-            $sql2 = "SELECT user_name FROM `users` WHERE sno='$thread_user_id'";
-            $result2 = mysqli_query($conn , $sql2);
-            $row2 = mysqli_fetch_assoc($result2);
+            $sql_user = "SELECT user_name FROM `users` WHERE sno='$thread_user_id'";
+            $result_user = mysqli_query($conn , $sql_user);
+            $row2 = mysqli_fetch_assoc($result_user);
             $username = $row2['user_name'];
-
             echo '<div class="media d-flex mt-4">
                         <img src="images/user.png" class="me-3" style="width: 40px; height: 40px;" alt="...">
                         <div class="media-body">
                             <p class="fw-bold my-0">'.$username.' <small class="text-secondary">'.$time.'</small></p>
                             <p class="my-0">"' . $content . '"</p>
-                            
                         </div>
                     </div>
                 ';

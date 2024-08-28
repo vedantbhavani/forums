@@ -12,7 +12,7 @@
                     <label for="signupEmail" id="logout-line1" class="form-label">Have a great day ahead!</label>
                     <label for="signupEmail" id="logout-line2" class="form-label">See you next time😊</label>
                     <div>
-                        <button type="submit" class="btn btn-primary">Logout</button>
+                        <button name="submit" type="submit" class="btn btn-primary">Logout</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </form>

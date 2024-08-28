@@ -14,8 +14,8 @@
                         <input type="text" name="loginemail" class="bg-secondary-subtle form-control" id="loginemail" required>
                     </div>
                     <div class="mb-3">
-                        <label for="loginpassword" class="form-label">Password</label>
-                        <input type="password" name="loginpassword" class="bg-secondary-subtle form-control" id="loginpassword" required>
+                        <label for="loginPassword" class="form-label">Password</label>
+                        <input type="password" name="loginPassword" class="bg-secondary-subtle form-control" id="loginPassword" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>
                 </form>

@@ -35,6 +35,7 @@ session_start();
             $th_title = mysqli_real_escape_string($conn, $_POST['title']);
             $th_desc = mysqli_real_escape_string($conn, $_POST['desc']);
             $sno = $_POST['sno'];
+            
             $sql = "INSERT INTO `threads` ( `thread_title`, `thread_desc`, `thread_cat_id`, `thread_user_id`, `posted_at`) VALUES ('$th_title', '$th_desc', '$gid', '$sno', current_timestamp());";
             $result = mysqli_query($conn, $sql);
             $myalert = true;
@@ -75,9 +76,8 @@ session_start();
                     <div class="mb-3">
                         <label for="title" class="form-label">Problem title</label>
                         <input type="text" class="bg-secondary-subtle form-control" name="title" id="title">
-                        <input type="hidden" name="sno" value="'.$_SESSION["sno"].'">
                         </div>
-                        
+                        <input type="hidden" name="sno" value="'.$_SESSION["sno"].'">
                     <div class="mb-3">
                         <label for="desc" class="form-label">Elaborate your concern</label>
                         <textarea class="bg-secondary-subtle form-control" name="desc" id="desc" rows="3"></textarea>

@@ -40,7 +40,7 @@ if ($loggedin) {
       <form class="d-flex" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-success" type="submit">Search</button>
-      <button class="btn ms-2 btn-outline-danger" data-bs-toggle="modal" type="button" data-bs-target="#logoutModal">Logout</button>
+      <a class="btn ms-2 btn-outline-danger"  href="/forums/partials/handlelogout.php">Logout</a>
     </form>
     ';
 }
@@ -81,8 +81,8 @@ if (isset($_SESSION['signup_success']) && $_SESSION['signup_success']) {
 if (isset($_SESSION['signup_repeat']) && $_SESSION['signup_repeat']) {
   $myerror = true;
   $myerror = "User already exist";
-  include("partials/alerterror.php");
-  unset($_SESSION['signup_success']); // Unset the session variable after showing the alert
+  require("partials/alerterror.php");
+  unset($_SESSION['signup_repeat']); // Unset the session variable after showing the alert
 }
 if (isset($_SESSION['signup_notmatch']) && $_SESSION['signup_notmatch']) {
   $myerror = true;
@@ -99,9 +99,7 @@ if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
 
 include("partials/login.php");
 include("partials/signup.php");
-include("partials/logout.php");
 include("partials/handlesignup.php");
 include("partials/handlelogin.php");
-include("partials/handlelogout.php");
 include("partials/alerterror.php");
 include("partials/addcategory.php");

@@ -10,7 +10,7 @@
         $desc_card = $row['category_description'];
         echo '
             <div class="col-md-4 my-3">
-                <div class="card" style="width: 18rem; height: 70vh">'?>
+                <div class="card" style="width: 18rem; height: 65vh">'?>
                     <img src="uploded_images/<?php echo $images_card ?>" class="card-img-top" style="width: 100%; height: 190px;" alt="">
                     <?php 
                     echo '
