@@ -25,6 +25,16 @@ session_start();
         $noResult = false;
         $title = $row['thread_title'];
         $desc = $row['thread_desc'];
+        $title = str_replace("<" , "&lt;" , $title);
+        $title = str_replace(">" , "&gt;" , $title);
+        $desc = str_replace("<" , "&lt;" , $desc);
+        $desc = str_replace(">" , "&gt;" , $desc);
+        $thread_user_id = $row['thread_user_id'];
+
+        $sql_user = "SELECT user_name FROM `users` WHERE sno='$thread_user_id'";
+        $result_user = mysqli_query($conn , $sql_user);
+        $row2 = mysqli_fetch_assoc($result_user);
+        $posted_by = $row2['user_name'];
     }
     ?>
 
@@ -35,6 +45,8 @@ session_start();
     if ($method == 'POST') {
         // Insert in to comment db
         $comment = $_POST['comment'];
+        $comment = str_replace("<" , "&lt;" , $comment);
+        $comment = str_replace(">" , "&gt;" , $comment);
         $sno = $_POST['sno'];
         $sql = "INSERT INTO `comments` (`comment_content`, `comment_by`, `thread_id`, `comment_time`) VALUES ('$comment', '$sno', '$id', current_timestamp());";
         $result = mysqli_query($conn, $sql);
@@ -59,7 +71,7 @@ session_start();
             </p>
             <hr class="my-3">
             <p><b>Notes: </b>Users are entitled to choose not to enter into debate with you. Don't post or link to inappropriate, offensive or illegal material. Inappropriate content is anything that may offend or is not relevant to the forum. Don't post any advertisements or solicitations, however much you believe in the service or product.</p>
-            <p class="text-end mb-0">Post by<span class="fw-bold "> Stephen</span></p>
+            <p class="text-end mb-0">Post by<span class="fw-bold "> <?php echo $posted_by ?> </span></p>
         </div>
 
         <!-- Threads part start here -->
@@ -108,6 +120,10 @@ session_start();
             $content = $row['comment_content'];
             $time = $row['comment_time'];
             $thread_user_id = $row['comment_by'];
+            $content = str_replace("<" , "&lt;" , $content);
+            $content = str_replace(">" , "&gt;" , $content);
+            $username = str_replace("<" , "&lt;" , $username);
+            $username = str_replace(">" , "&gt;" , $username);
             $sql_user = "SELECT user_name FROM `users` WHERE sno='$thread_user_id'";
             $result_user = mysqli_query($conn , $sql_user);
             $row2 = mysqli_fetch_assoc($result_user);
@@ -116,7 +132,7 @@ session_start();
                         <img src="images/user.png" class="me-3" style="width: 40px; height: 40px;" alt="...">
                         <div class="media-body">
                             <p class="fw-bold my-0">'.$username.' <small class="text-secondary">'.$time.'</small></p>
-                            <p class="my-0">"' . $content . '"</p>
+                            <p class="my-0">' . $content . '</p>
                         </div>
                     </div>
                 ';

@@ -34,6 +34,12 @@ session_start();
             // Insert in to threads db
             $th_title = mysqli_real_escape_string($conn, $_POST['title']);
             $th_desc = mysqli_real_escape_string($conn, $_POST['desc']);
+
+            $th_title = str_replace("<" , "&lt;" , $th_title);
+            $th_title = str_replace(">" , "&gt;" , $th_title);
+            $th_desc = str_replace("<" , "&lt;" , $th_desc);
+            $th_desc = str_replace(">" , "&gt;" , $th_desc);
+
             $sno = $_POST['sno'];
             $sql = "INSERT INTO `threads` ( `thread_title`, `thread_desc`, `thread_cat_id`, `thread_user_id`, `posted_at`) VALUES ('$th_title', '$th_desc', '$gid', '$sno', current_timestamp());";
             $result = mysqli_query($conn, $sql);
@@ -110,6 +116,13 @@ session_start();
                 $title = $row['thread_title'];
                 $desc = $row['thread_desc'];
                 $time = $row['posted_at'];
+
+                $title = str_replace("<" , "&lt;" , $title);
+                $title = str_replace(">" , "&gt;" , $title);
+                $desc = str_replace("<" , "&lt;" , $desc);
+                $desc = str_replace(">" , "&gt;" , $desc);
+    
+
                 $thread_user_id = $row['thread_user_id'];
                 $sql2 = "SELECT user_name FROM `users` WHERE sno='$thread_user_id'";
                 $result2 = mysqli_query($conn , $sql2);

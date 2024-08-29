@@ -27,18 +27,25 @@ echo '
         Categories
         </a>
         <ul class="dropdown-menu dropdown-menu-dark">
-        <button class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#addcategoryModal">Add Category</button>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
+         ';
+          $sql = "SELECT * FROM `categories` ";
+          $result = mysqli_query($conn, $sql);
+          while ($row = mysqli_fetch_assoc($result)) {
+            $id = $row['category_id'];
+            $name_card = $row['category_name'];
+
+       echo '
+        <li><a href="threadlist.php?catid='. $id .'" class="dropdown-item">'.$name_card.'</a></li>';
+}
+      echo '</ul>
+        
         </li>
         </ul>
         ';
 if ($loggedin) {
   echo '
-      <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="d-flex" role="search" action="search.php" method="get">
+      <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-success" type="submit">Search</button>
       <a class="btn ms-2 btn-outline-danger"  href="/forums/partials/handlelogout.php">Logout</a>
     </form>
@@ -103,3 +110,4 @@ include("partials/handlesignup.php");
 include("partials/handlelogin.php");
 include("partials/alerterror.php");
 include("partials/addcategory.php");
+// <button class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#addcategoryModal">Add Category</button>
