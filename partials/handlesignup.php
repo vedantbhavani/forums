@@ -2,6 +2,7 @@
 $myalert = false;
 $myerror = false;
 $method = $_SERVER['REQUEST_METHOD'];
+$_SESSION['redirect_url'] = $_SERVER['REQUEST_URI'];
 if ($method == 'POST') {
     if (isset($_POST['signupEmail'], $_POST['signupPassword'], $_POST['signupcPassword'])) {
         include("dbconnect.php");
@@ -35,7 +36,8 @@ if ($method == 'POST') {
                     $_SESSION['sno'] = $row['sno'];
                     $_SESSION['useremail'] = $user_email;
                     $myalert = "Signup Process is Successfull";
-                    header('Location: /forums/');
+                    $redirect_url = $_SESSION['redirect_url'];
+                    header("location: ".$redirect_url);
                 } else {
                     if (!session_start()) {
                         session_start();

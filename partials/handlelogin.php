@@ -1,5 +1,6 @@
 <?php
 $method = $_SERVER['REQUEST_METHOD'];
+$_SESSION['redirect_url'] = $_SERVER['REQUEST_URI'];
 if ($method == "POST") {
     if (isset($_POST['loginemail']) && isset($_POST['loginPassword'])) {
         session_start();
@@ -18,7 +19,8 @@ if ($method == "POST") {
                 $_SESSION['sno'] = $row['sno'];
                 $_SESSION['login_success'] = true;
                 $_SESSION['useremail'] = $user_email;
-                header("location: /forums/?login=true");
+                $redirect_url = $_SESSION['redirect_url'];
+                header("location: ".$redirect_url);
             } else {
                 header("location: /forums/?password=false");
             }

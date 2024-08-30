@@ -28,16 +28,16 @@ echo '
         </a>
         <ul class="dropdown-menu dropdown-menu-dark">
          ';
-          $sql = "SELECT * FROM `categories` ";
-          $result = mysqli_query($conn, $sql);
-          while ($row = mysqli_fetch_assoc($result)) {
-            $id = $row['category_id'];
-            $name_card = $row['category_name'];
+$sql = "SELECT * FROM `categories` ";
+$result = mysqli_query($conn, $sql);
+while ($row = mysqli_fetch_assoc($result)) {
+  $id = $row['category_id'];
+  $name_card = $row['category_name'];
 
-       echo '
-        <li><a href="threadlist.php?catid='. $id .'" class="dropdown-item">'.$name_card.'</a></li>';
+  echo '
+        <li><a href="threadlist.php?catid=' . $id . '" class="dropdown-item">' . $name_card . '</a></li>';
 }
-      echo '</ul>
+echo '</ul>
         
         </li>
         </ul>
@@ -54,7 +54,6 @@ if ($loggedin) {
 if (!$loggedin) {
 
   echo '
-
       <form class="d-flex" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-success" type="submit">Search</button>
