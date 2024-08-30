@@ -25,28 +25,28 @@ session_start();
         $noResult = false;
         $title = $row['thread_title'];
         $desc = $row['thread_desc'];
-        $title = str_replace("<" , "&lt;" , $title);
-        $title = str_replace(">" , "&gt;" , $title);
-        $desc = str_replace("<" , "&lt;" , $desc);
-        $desc = str_replace(">" , "&gt;" , $desc);
+        $title = str_replace("<", "&lt;", $title);
+        $title = str_replace(">", "&gt;", $title);
+        $desc = str_replace("<", "&lt;", $desc);
+        $desc = str_replace(">", "&gt;", $desc);
         $thread_user_id = $row['thread_user_id'];
 
         $sql_user = "SELECT user_name FROM `users` WHERE sno='$thread_user_id'";
-        $result_user = mysqli_query($conn , $sql_user);
+        $result_user = mysqli_query($conn, $sql_user);
         $row2 = mysqli_fetch_assoc($result_user);
         $posted_by = $row2['user_name'];
     }
     ?>
 
-<?php
+    <?php
     $myalert = false;
     $id = $_GET['threadid'];
     $method = $_SERVER['REQUEST_METHOD'];
     if ($method == 'POST') {
         // Insert in to comment db
         $comment = $_POST['comment'];
-        $comment = str_replace("<" , "&lt;" , $comment);
-        $comment = str_replace(">" , "&gt;" , $comment);
+        $comment = str_replace("<", "&lt;", $comment);
+        $comment = str_replace(">", "&gt;", $comment);
         $sno = $_POST['sno'];
         $sql = "INSERT INTO `comments` (`comment_content`, `comment_by`, `thread_id`, `comment_time`) VALUES ('$comment', '$sno', '$id', current_timestamp());";
         $result = mysqli_query($conn, $sql);
@@ -66,13 +66,19 @@ session_start();
     <div class="container w-75 " style="min-height: 63.5vh;">
         <div class="container my-4 bg-dark-subtle p-4">
             <h2 class="display-5 text-center"><?php echo $title ?></h2>
-            <p class="lead  ">
+            <p class="lead card_desc ">
                 <?php echo $desc ?>
             </p>
             <hr class="my-3">
             <p><b>Notes: </b>Users are entitled to choose not to enter into debate with you. Don't post or link to inappropriate, offensive or illegal material. Inappropriate content is anything that may offend or is not relevant to the forum. Don't post any advertisements or solicitations, however much you believe in the service or product.</p>
             <p class="text-end mb-0">Post by<span class="fw-bold "> <?php echo $posted_by ?> </span></p>
         </div>
+        <script>
+            let desc = document.querySelectorAll('.card_desc')
+            for (let i = 0; i < desc.length; i++) {
+                desc[i].innerHTML.length > 340 ? desc[i].innerHTML = desc[i].innerHTML.slice(0, 340) + "..." : desc[i].innerHTML;
+            }
+        </script>
 
         <!-- Threads part start here -->
         <div class="container-lg">
@@ -81,27 +87,26 @@ session_start();
                 <hr class="mt-0 mb-4">
             </div>
             <?php
-            
+
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 echo '
-            <form action="'.$_SERVER["REQUEST_URI"].'" method="post">
+            <form action="' . $_SERVER["REQUEST_URI"] . '" method="post">
                 <div class="mb-3">
                     <label for="comment" class="form-label">Enter your comment</label>
                     <textarea class="bg-secondary-subtle form-control" name="comment" id="comment" rows="3"></textarea>
-                    <input type="hidden" name="sno" value="'.$_SESSION["sno"].'">
-                    <input type="hidden" name="sno" value="'.$_SESSION["sno"].'">
+                    <input type="hidden" name="sno" value="' . $_SESSION["sno"] . '">
+                    <input type="hidden" name="sno" value="' . $_SESSION["sno"] . '">
                     </div>
                 <button type="submit" class="btn btn-primary">Post Comment</button>
             </form>
             ';
-            }
-            else{
-                echo'
+            } else {
+                echo '
                 <p class="fw-bold fs-5">Are you want to join this comment section then you should finish the Signup process </p>
                 ';
             }
             ?>
-            
+
         </div>
 
         <div class="media-part mt-5">
@@ -120,18 +125,18 @@ session_start();
             $content = $row['comment_content'];
             $time = $row['comment_time'];
             $thread_user_id = $row['comment_by'];
-            $content = str_replace("<" , "&lt;" , $content);
-            $content = str_replace(">" , "&gt;" , $content);
-            $username = str_replace("<" , "&lt;" , $username);
-            $username = str_replace(">" , "&gt;" , $username);
+            $content = str_replace("<", "&lt;", $content);
+            $content = str_replace(">", "&gt;", $content);
+            $username = str_replace("<", "&lt;", $username);
+            $username = str_replace(">", "&gt;", $username);
             $sql_user = "SELECT user_name FROM `users` WHERE sno='$thread_user_id'";
-            $result_user = mysqli_query($conn , $sql_user);
+            $result_user = mysqli_query($conn, $sql_user);
             $row2 = mysqli_fetch_assoc($result_user);
             $username = $row2['user_name'];
             echo '<div class="media d-flex mt-4">
                         <img src="images/user.png" class="me-3" style="width: 40px; height: 40px;" alt="...">
                         <div class="media-body">
-                            <p class="fw-bold my-0">'.$username.' <small class="text-secondary">'.$time.'</small></p>
+                            <p class="fw-bold my-0">' . $username . ' <small class="text-secondary">' . $time . '</small></p>
                             <p class="my-0">' . $content . '</p>
                         </div>
                     </div>

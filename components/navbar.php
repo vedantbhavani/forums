@@ -47,7 +47,7 @@ if ($loggedin) {
       <form class="d-flex" role="search" action="search.php" method="get">
       <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-success" type="submit">Search</button>
-      <a class="btn ms-2 btn-outline-danger"  href="/forums/partials/handlelogout.php">Logout</a>
+      <a class="btn ms-2 btn-outline-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
     </form>
     ';
 }
@@ -106,6 +106,7 @@ if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
 
 include("partials/login.php");
 include("partials/signup.php");
+include("partials/logout.php");
 include("partials/handlesignup.php");
 include("partials/handlelogin.php");
 include("partials/alerterror.php");

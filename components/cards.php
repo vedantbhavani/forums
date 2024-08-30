@@ -9,8 +9,8 @@
         $name_card = $row['category_name'];
         $desc_card = $row['category_description'];
         echo '
-            <div class="col-md-4 my-3">
-                <div class="card" style="width: 18rem; height: 65vh">'?>
+            <div class="col my-3">
+                <div class="card" style="width: 18rem;">'?>
                     <img src="uploded_images/<?php echo $images_card ?>" class="card-img-top" style="width: 100%; height: 190px;" alt="">
                     <?php 
                     echo '
@@ -27,7 +27,6 @@
 </div>
 <script>
     let desc = document.querySelectorAll('.card_desc')
-    console.log(desc[9]);
     for(let i = 0; i < desc.length; i++){
         desc[i].innerHTML.length > 120 ? desc[i].innerHTML = desc[i].innerHTML.slice(0,120)+"..." : desc[i].innerHTML;
     }

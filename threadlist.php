@@ -35,10 +35,10 @@ session_start();
             $th_title = mysqli_real_escape_string($conn, $_POST['title']);
             $th_desc = mysqli_real_escape_string($conn, $_POST['desc']);
 
-            $th_title = str_replace("<" , "&lt;" , $th_title);
-            $th_title = str_replace(">" , "&gt;" , $th_title);
-            $th_desc = str_replace("<" , "&lt;" , $th_desc);
-            $th_desc = str_replace(">" , "&gt;" , $th_desc);
+            $th_title = str_replace("<", "&lt;", $th_title);
+            $th_title = str_replace(">", "&gt;", $th_title);
+            $th_desc = str_replace("<", "&lt;", $th_desc);
+            $th_desc = str_replace(">", "&gt;", $th_desc);
 
             $sno = $_POST['sno'];
             $sql = "INSERT INTO `threads` ( `thread_title`, `thread_desc`, `thread_cat_id`, `thread_user_id`, `posted_at`) VALUES ('$th_title', '$th_desc', '$gid', '$sno', current_timestamp());";
@@ -59,7 +59,7 @@ session_start();
     <div class="container w-75 " style="min-height: 63.5vh;">
         <div class="container my-4 bg-dark-subtle p-4">
             <h1 class="display-4 text-center">Welcome to <?php echo $catname ?> forums</h1>
-            <p class="lead  ">
+            <p class="lead card_desc ">
                 <?php echo $catdesc ?>
             </p>
             <hr class="my-3">
@@ -67,6 +67,12 @@ session_start();
             <a href="#" class="btn btn-lg btn-primary">Learn more</a>
         </div>
     </div>
+    <script>
+        let desc = document.querySelectorAll('.card_desc')
+        for (let i = 0; i < desc.length; i++) {
+            desc[i].innerHTML.length > 340 ? desc[i].innerHTML = desc[i].innerHTML.slice(0, 340) + "..." : desc[i].innerHTML;
+        }
+    </script>
 
     <div class="container w-75 " style="min-height: 63.5vh;">
         <div class="container-lg">
@@ -77,11 +83,11 @@ session_start();
             <?php
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 echo '
-                <form action="'.$_SERVER["REQUEST_URI"].'" method="post">
+                <form action="' . $_SERVER["REQUEST_URI"] . '" method="post">
                     <div class="mb-3">
                         <label for="title" class="form-label">Problem title</label>
                         <input type="text" class="bg-secondary-subtle form-control" name="title" id="title">
-                        <input type="hidden" name="sno" value="'.$_SESSION["sno"].'">
+                        <input type="hidden" name="sno" value="' . $_SESSION["sno"] . '">
                         </div>
                         
                     <div class="mb-3">
@@ -90,9 +96,8 @@ session_start();
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>';
-            }
-            else{
-                echo'
+            } else {
+                echo '
                 <p class="fw-bold">Are you want to join this discussion then you should finish the Signup process </p>
                 ';
             }
@@ -117,21 +122,21 @@ session_start();
                 $desc = $row['thread_desc'];
                 $time = $row['posted_at'];
 
-                $title = str_replace("<" , "&lt;" , $title);
-                $title = str_replace(">" , "&gt;" , $title);
-                $desc = str_replace("<" , "&lt;" , $desc);
-                $desc = str_replace(">" , "&gt;" , $desc);
-    
+                $title = str_replace("<", "&lt;", $title);
+                $title = str_replace(">", "&gt;", $title);
+                $desc = str_replace("<", "&lt;", $desc);
+                $desc = str_replace(">", "&gt;", $desc);
+
 
                 $thread_user_id = $row['thread_user_id'];
                 $sql2 = "SELECT user_name FROM `users` WHERE sno='$thread_user_id'";
-                $result2 = mysqli_query($conn , $sql2);
+                $result2 = mysqli_query($conn, $sql2);
                 $row2 = mysqli_fetch_assoc($result2);
                 $username = $row2['user_name'];
                 echo '<div class="media d-flex mt-4">
                         <img src="images/user.png" class="me-3" style="width: 40px; height: 40px;" alt="...">
                         <div class="media-body">
-                        <p class="fw-bold my-0">'.$username.' <small class="text-secondary">' . $time . '</small></p>
+                        <p class="fw-bold my-0">' . $username . ' <small class="text-secondary">' . $time . '</small></p>
                             <h5 class="mt-0"> <a class="text-primary-emphasis text-decoration-none" href="thread.php?threadid=' . $id . '"> ' . $title . '</a></h5>
                             <p class="my-0">' . $desc . '</p>
                         </div>

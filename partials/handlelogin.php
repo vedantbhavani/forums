@@ -20,10 +20,10 @@ if ($method == "POST") {
                 $_SESSION['useremail'] = $user_email;
                 header("location: /forums/?login=true");
             } else {
-                header("location: /forums/?login=false");
+                header("location: /forums/?password=false");
             }
         } else {
-            header("location: /forums/?thisisnot=true");
+            header("location: /forums/?usernotfound=true");
         }
     }
 }

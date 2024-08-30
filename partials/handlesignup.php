@@ -26,7 +26,6 @@ if ($method == 'POST') {
         } else {
             if ($user_pass == $user_cpass) {
                 $hash = password_hash($user_pass, PASSWORD_DEFAULT);
-                // $hash = $user_pass;
                 $sql = "INSERT INTO `users` (`user_name` , `user_email`, `user_pass`,`timestamp`) VALUES ('$user_name' , '$user_email', '$hash' , current_timestamp());";
                 $result = mysqli_query($conn, $sql);
                 $myalert = true;
