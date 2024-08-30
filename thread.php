@@ -44,7 +44,7 @@ session_start();
     $method = $_SERVER['REQUEST_METHOD'];
     if ($method == 'POST') {
         // Insert in to comment db
-        $comment = $_POST['comment'];
+        $comment = mysqli_real_escape_string($conn , $_POST['comment']);
         $comment = str_replace("<", "&lt;", $comment);
         $comment = str_replace(">", "&gt;", $comment);
         $sno = $_POST['sno'];
