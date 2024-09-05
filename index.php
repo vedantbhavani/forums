@@ -9,7 +9,7 @@ require("partials/dbconnect.php");
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Forums</title>
     <?php include("links/script.php"); ?>
 </head>
 

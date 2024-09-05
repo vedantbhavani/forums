@@ -127,7 +127,6 @@ session_start();
                 $desc = str_replace("<", "&lt;", $desc);
                 $desc = str_replace(">", "&gt;", $desc);
 
-
                 $thread_user_id = $row['thread_user_id'];
                 $sql2 = "SELECT user_name FROM `users` WHERE sno='$thread_user_id'";
                 $result2 = mysqli_query($conn, $sql2);

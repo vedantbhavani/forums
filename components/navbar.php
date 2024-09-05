@@ -28,16 +28,16 @@ echo '
         </a>
         <ul class="dropdown-menu dropdown-menu-dark">
          ';
-$sql = "SELECT * FROM `categories` ";
-$result = mysqli_query($conn, $sql);
-while ($row = mysqli_fetch_assoc($result)) {
-  $id = $row['category_id'];
-  $name_card = $row['category_name'];
+          $sql = "SELECT * FROM `categories` ";
+          $result = mysqli_query($conn, $sql);
+          while ($row = mysqli_fetch_assoc($result)) {
+            $id = $row['category_id'];
+            $name_card = $row['category_name'];
 
-  echo '
-        <li><a href="threadlist.php?catid=' . $id . '" class="dropdown-item">' . $name_card . '</a></li>';
+       echo '
+        <li><a href="threadlist.php?catid='. $id .'" class="dropdown-item">'.$name_card.'</a></li>';
 }
-echo '</ul>
+      echo '</ul>
         
         </li>
         </ul>
@@ -94,13 +94,19 @@ if (isset($_SESSION['signup_notmatch']) && $_SESSION['signup_notmatch']) {
   $myerror = true;
   $myerror = "Password do not match";
   include("partials/alerterror.php");
-  unset($_SESSION['signup_success']); // Unset the session variable after showing the alert
+  unset($_SESSION['signup_notmatch']); // Unset the session variable after showing the alert
 }
 if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
   $myalert = true;
   $myalert = "Logged in successful ";
   include("partials/alerterror.php");
   unset($_SESSION['login_success']); // Unset the session variable after showing the alert
+}
+if (isset($_SESSION['login_usernot']) && $_SESSION['login_usernot']) {
+  $myerror = true;
+  $myerror = "User not found";
+  include("partials/alerterror.php");
+  unset($_SESSION['login_usernot']); // Unset the session variable after showing the alert
 }
 
 include("partials/login.php");

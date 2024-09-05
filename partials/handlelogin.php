@@ -22,9 +22,11 @@ if ($method == "POST") {
                 $redirect_url = $_SESSION['redirect_url'];
                 header("location: ".$redirect_url);
             } else {
+                $_SESSION['signup_notmatch'] = true;
                 header("location: /forums/?password=false");
             }
         } else {
+            $_SESSION['login_usernot'] = true;
             header("location: /forums/?usernotfound=true");
         }
     }
